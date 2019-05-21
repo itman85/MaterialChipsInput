@@ -7,8 +7,6 @@ import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.os.Build;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -16,24 +14,24 @@ import android.view.animation.AlphaAnimation;
 import android.widget.Filter;
 import android.widget.RelativeLayout;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.pchmn.materialchips.ChipsInput;
 import com.pchmn.materialchips.R;
-import com.pchmn.materialchips.R2;
 import com.pchmn.materialchips.adapter.FilterableAdapter;
 import com.pchmn.materialchips.model.ChipInterface;
 import com.pchmn.materialchips.util.ViewUtil;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class FilterableListView extends RelativeLayout {
 
     private static final String TAG = FilterableListView.class.toString();
     private Context mContext;
     // list
-    @BindView(R2.id.recycler_view) RecyclerView mRecyclerView;
+    RecyclerView mRecyclerView;
     private FilterableAdapter mAdapter;
     private List<? extends ChipInterface> mFilterableList;
     // others
@@ -48,11 +46,10 @@ public class FilterableListView extends RelativeLayout {
     private void init() {
         // inflate layout
         View view = inflate(getContext(), R.layout.list_filterable_view, this);
-        // butter knife
-        ButterKnife.bind(this, view);
 
+        mRecyclerView = view.findViewById(R.id.recycler_view);
         // recycler
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false));
 
         // hide on first
         setVisibility(GONE);

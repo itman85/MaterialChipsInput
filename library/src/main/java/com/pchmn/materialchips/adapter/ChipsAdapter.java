@@ -2,7 +2,6 @@ package com.pchmn.materialchips.adapter;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -14,6 +13,8 @@ import android.view.ViewTreeObserver;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.pchmn.materialchips.ChipView;
 import com.pchmn.materialchips.ChipsInput;

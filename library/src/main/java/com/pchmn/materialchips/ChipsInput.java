@@ -7,11 +7,12 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.LinearLayout;
+
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.beloo.widget.chipslayoutmanager.ChipsLayoutManager;
 import com.pchmn.materialchips.adapter.ChipsAdapter;
@@ -23,21 +24,18 @@ import com.pchmn.materialchips.util.ViewUtil;
 import com.pchmn.materialchips.views.ChipsInputEditText;
 import com.pchmn.materialchips.views.DetailedChipView;
 import com.pchmn.materialchips.views.FilterableListView;
-import com.pchmn.materialchips.views.ScrollViewMaxHeight;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class ChipsInput extends ScrollViewMaxHeight {
+public class ChipsInput extends LinearLayout {
 
     private static final String TAG = ChipsInput.class.toString();
     // context
     private Context mContext;
     // xml element
-    @BindView(R2.id.chips_recycler) RecyclerView mRecyclerView;
+    RecyclerView mRecyclerView;
     // adapter
     private ChipsAdapter mChipsAdapter;
     // attributes
@@ -86,10 +84,8 @@ public class ChipsInput extends ScrollViewMaxHeight {
      */
     private void init(AttributeSet attrs) {
         // inflate layout
-        View rootView = inflate(getContext(), R.layout.chips_input, this);
-        // butter knife
-        ButterKnife.bind(this, rootView);
-
+        View rootView = inflate(getContext(), R.layout.chips_input1, this);
+        mRecyclerView = rootView.findViewById(R.id.chips_recycler);
         // attributes
         if(attrs != null) {
             TypedArray a = mContext.getTheme().obtainStyledAttributes(
@@ -103,7 +99,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
                 mHintColor = a.getColorStateList(R.styleable.ChipsInput_hintColor);
                 mTextColor = a.getColorStateList(R.styleable.ChipsInput_textColor);
                 mMaxRows = a.getInteger(R.styleable.ChipsInput_maxRows, 2);
-                setMaxHeight(ViewUtil.dpToPx((40 * mMaxRows) + 8));
+               /// setMaxHeight(ViewUtil.dpToPx((40 * mMaxRows) + 8));
                 //setVerticalScrollBarEnabled(true);
                 // chip label color
                 mChipLabelColor = a.getColorStateList(R.styleable.ChipsInput_chip_labelColor);
@@ -136,6 +132,7 @@ public class ChipsInput extends ScrollViewMaxHeight {
         ChipsLayoutManager chipsLayoutManager = ChipsLayoutManager.newBuilder(mContext)
                 .setOrientation(ChipsLayoutManager.HORIZONTAL)
                 .build();
+
         mRecyclerView.setLayoutManager(chipsLayoutManager);
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setAdapter(mChipsAdapter);

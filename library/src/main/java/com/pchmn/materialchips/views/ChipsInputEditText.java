@@ -5,7 +5,9 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 
-public class ChipsInputEditText extends android.support.v7.widget.AppCompatEditText {
+import androidx.appcompat.widget.AppCompatEditText;
+
+public class ChipsInputEditText extends AppCompatEditText {
 
     private FilterableListView filterableListView;
 
